@@ -1,28 +1,42 @@
+<?php
+/*Online Quiz (POST)
+Create a quiz form with 3 multiple-choice questions.
+On submission, check answers and display the score out of 3.*/
+$score = 0;
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    if($_POST['q1']=="b") $score++;
+    if($_POST['q2']=="a") $score++;
+    if($_POST['q3']=="c") $score++;
+}
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Result Check</title>
+    <title>Online Quiz</title>
 </head>
 <body>
-    <!-- Form to enter marks -->
-    <form method="get" action="Practical45.php">
-        Enter Marks: <input type="text" name="marks">
-        <input type="submit" value="Check Result">
+<?php if($_SERVER["REQUEST_METHOD"]=="POST"): ?>
+    <h2>Your Score: <?php echo $score; ?> / 3</h2>
+<?php else: ?>
+    <form method="POST">
+        <p>1. Capital of India?</p>
+        <input type="radio" name="q1" value="a"> Mumbai<br>
+        <input type="radio" name="q1" value="b"> New Delhi<br>
+        <input type="radio" name="q1" value="c"> Kolkata<br><br>
+
+        <p>2. 2 + 2 = ?</p>
+        <input type="radio" name="q2" value="a"> 4<br>
+        <input type="radio" name="q2" value="b"> 5<br>
+        <input type="radio" name="q2" value="c"> 22<br><br>
+
+        <p>3. National Animal of India?</p>
+        <input type="radio" name="q3" value="a"> Lion<br>
+        <input type="radio" name="q3" value="b"> Elephant<br>
+        <input type="radio" name="q3" value="c"> Tiger<br><br>
+
+        <input type="submit" value="Submit Quiz">
     </form>
-
-    <?php
-    /* Pass a marks value using HTML form using GET method (result.php?marks=45) 
-and display PASS if marks ≥ 40, else FAIL.*/
-    if (isset($_GET['marks'])) {
-        $marks = $_GET['marks'];
-
-        if ($marks >= 40) {
-            echo "<h2>PASS</h2>";
-        } else {
-            echo "<h2>FAIL</h2>";
-        }
-    }
-    ?>
+<?php endif; ?>
 </body>
 </html>

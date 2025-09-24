@@ -2,63 +2,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Login System</title>
+    <title>User Registration</title>
 </head>
 <body>
-    <h2>Login Form</h2>
+    <h2>User Registration Form</h2>
 
-    <!-- Login form -->
-    <form method="post" action="">
-        Username: <input type="text" name="username" required><br><br>
-        Password: <input type="password" name="password" required><br><br>
-        <input type="submit" value="Login">
-    </form>
-
-    <?php
-    /*Simple Login System
-
-Use POST to process form data and compare it with predefined values.
-
-Create a simple login form with username and password fields.
-
-Set the form method to POST.
-
-In the processing PHP file (login.php), check if the 
-submitted username is admin and the password is 12345.
-
-If the credentials match, display a "Login successful!" message.
-
-If they do not match, display an "Invalid credentials" error.
-
-Challenge: Use the isset() function to check if the form has 
-been submitted before trying to access the $_POST variables*/
-    // Check if form is submitted
-    if (isset($_POST['username']) && isset($_POST['password'])) {
+<?php
+  /*User Registration Form
+ Objective: Pass multiple values securely and display them.
+Create an HTML form for user registration. Include fields for username,
+ email, and password.
+Set the form's method to POST.
+In the processing PHP file (register.php), retrieve the values using 
+$_POST['username'],
+ $_POST['email'], and $_POST['password'].
+Echo all the submitted information back to the user, confirming their
+ registration details. Do not store the password yet.
+Challenge: Add validation. Check if any of the fields are empty using 
+empty() 
+and display an error message if so.*/
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = $_POST['username'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
 
-        // Compare with predefined credentials
-        if ($username === "admin" && $password === "12345") {
-            echo "<h3 style='color:green;'>Login successful!</h3>";
+        // Validation
+        if (empty($username) || empty($email) || empty($password)) {
+            echo "<p style='color:red;'>Error: All fields are required!</p>";
         } else {
-            echo "<h3 style='color:red;'>Invalid credentials</h3>";
+            echo "<h3>Registration Successful!</h3>";
+            echo "Username: " . htmlspecialchars($username) . "<br>";
+            echo "Email: " . htmlspecialchars($email) . "<br>";
+            echo "Password: " . htmlspecialchars($password) . "<br>";
         }
     }
     ?>
+
+    <form method="POST">
+        Username: <input type="text" name="username"><br><br>
+        Email: <input type="email" name="email"><br><br>
+        Password: <input type="password" name="password"><br><br>
+        <input type="submit" value="Register">
+    </form>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

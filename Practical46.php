@@ -1,24 +1,29 @@
-
+<?php
+/*Contact Form 
+Create a contact form (Name, Subject, Message).
+On submission, show "Thank you <name>, we will contact you soon!"
+Use GET to pass the name to the thank-you page.*/
+if(isset($_GET['submitted'])){
+    $name = htmlspecialchars($_GET['name']);
+    echo "<h2>Thank you $name, we will contact you soon!</h2>";
+} else {
+?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome User</title>
+    <title>Contact Form</title>
 </head>
 <body>
-    <!-- Form to enter user's name -->
-    <form method="post" action="">
-        Enter Your Name: <input type="text" name="username" required>
-        <input type="submit" value="Submit">
+    <form method="GET">
+        <input type="hidden" name="submitted" value="1">
+        Name: <input type="text" name="name" required><br><br>
+        Subject: <input type="text" name="subject" required><br><br>
+        Message: <textarea name="message" required></textarea><br><br>
+        <input type="submit" value="Send">
     </form>
-
-    <?php
-    /*Create a form with a textbox asking for the user’s name. On submission using POST method, display:
-
-Welcome, <name>!*/
-    if (isset($_POST['username'])) {
-        $name = htmlspecialchars($_POST['username']); // Security: prevent XSS
-        echo "<h2>Welcome, $name!</h2>";
-    }
-    ?>
 </body>
 </html>
+<?php
+
+}
+?>

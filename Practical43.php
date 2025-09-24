@@ -1,13 +1,19 @@
-<?php
-/*Pass name and age in the URL (details.php?name=Anita&age=22) and display:
+<html>
+   <form method="post" action="">
+     <label>Which Is Your Favourite Lnguage</label>
+     <br>
+     <input type="radio" name="language" value="PHP">PHP<br>
+     <input type="radio" name="language" value="JavaScript">JavaScript<br>
+     <input type="radio" name="language" value="Python">Python<br>
+      <input type="submit"  value="submit">
+   </form>
 
-Hello Anita, you are 22 years old.*/ 
-// details.php
-if(isset($_GET['name']) && isset($_GET['age'])) {
-    $name = $_GET['name'];
-    $age  = $_GET['age'];
-    echo "Hello $name, you are $age years old.";
-} else {
-    echo "Please provide name and age in the URL.";
-}
-?>
+</html>
+<?php
+/*Create a form asking: "Which is your favorite programming language?" 
+(options: PHP, JavaScript, Python).
+On submission, display the selected choice.*/
+ if($_POST['language']){
+       echo"you selected:".$_POST['language'];
+    }   
+    ?>            
